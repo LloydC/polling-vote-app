@@ -4,14 +4,29 @@ import PollView from './components/PollView';
 import Chart from './components/Chart'; 
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <PollCreate/>
-      <PollView/>
-      <Chart/>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      question: "",
+      options: []
+    }
+    this.submitPoll = this.submitPoll.bind(this)
+  }
+
+submitPoll(poll){
+  this.setState({question: poll});
+}
+
+  render(){
+    return (
+      <div className="App">
+        <PollCreate submitPoll={this.submitPoll}/>
+        <PollView question={this.state.question}/>
+        <Chart/>
+      </div>
+    );
+  }
 }
 
 export default App;

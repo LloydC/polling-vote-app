@@ -11,18 +11,23 @@ class App extends React.Component {
       question: "",
       options: []
     }
-    this.submitPoll = this.submitPoll.bind(this)
+    this.submitPoll = this.submitPoll.bind(this);
+    this.getOptions = this.getOptions.bind(this);
   }
 
-submitPoll(poll){
-  this.setState({question: poll});
-}
+  submitPoll(poll){
+    this.setState({question: poll});
+  }
+
+  getOptions(options){
+    this.setState({options})
+  }
 
   render(){
     return (
       <div className="App">
-        <PollCreate submitPoll={this.submitPoll}/>
-        <PollView question={this.state.question}/>
+        <PollCreate submitPoll={this.submitPoll} getOptions={this.getOptions}/>
+        <PollView question={this.state.question} options={this.state.options}/>
         <Chart/>
       </div>
     );

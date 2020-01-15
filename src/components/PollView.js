@@ -6,6 +6,9 @@ function PollView(props) {
         <h1>Poll View Section</h1>
         <br/>
         <h2>{props.question}</h2>
+        {props.options.map(option => (
+        <p key={option}><input type="radio"></input>{option}</p>
+        ))}
     </div>
   );
 }

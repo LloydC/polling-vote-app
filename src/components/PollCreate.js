@@ -52,8 +52,15 @@ class PollCreate extends React.Component {
                     </form>
                     <br/>
                     {this.state.options.map(option => {
-                        return <div><input type="text" value={option}></input><button>X</button></div>
+                        return <div key={option}><input type="text" defaultValue={option}></input><button>X</button></div>
                     })}
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div>
+                {this.state.options.length ? <span>{this.state.options.length}/10 possible answers</span> : <span>0/10 possible answers</span> }
+                    <button>Reset</button>
+                    </div>
                 </div>
             </div>
           );

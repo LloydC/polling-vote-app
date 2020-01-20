@@ -9,36 +9,42 @@ class App extends React.Component {
     super(props)
     this.state = {
       question: "",
-      options: [],
-      vote: "",
+      votingOptions: [],
+      previousVote: "",
       votingColumns: []
     }
+    this.addVote = this.addVote.bind(this);
     this.submitPoll = this.submitPoll.bind(this);
-    this.submitVote = this.submitVote.bind(this);
     this.getOptions = this.getOptions.bind(this);
   }
 
-  submitPoll(poll){
-    this.setState({question: poll});
+  addVote(voteName){
+    let votingOptions = this.state.votingOptions;
+    let columnIndex = votingOptions.indexOf(voteName);
+    let votingColumns = this.state.votingColumns;
+      votingColumns[columnIndex]++;
+      this.setState({votingColumns, previousVote: voteName});
   }
 
-  submitVote(vote){
-   this.setState({vote})
+  calcPercentage(){
+
   }
 
-  getOptions(options, votingColumns){
-    console.log(this.state.options)
-    console.log(options.length)
-    console.log(votingColumns)
-    this.setState({options, votingColumns})
+  getOptions(votingOptions, votingColumns){
+    this.setState({votingOptions, votingColumns})
+  }
+  submitPoll(question){
+    this.setState({question});
   }
 
   render(){
+    const { question, votingOptions, votingColumns} = this.state;
+    
     return (
       <div className="App">
         <PollCreate submitPoll={this.submitPoll} getOptions={this.getOptions}/>
-        <PollView question={this.state.question} options={this.state.options} submitVote={this.submitVote}/>
-        <Chart vote={this.state.vote}/>
+        <PollView question={question} votingOptions={votingOptions} addVote={this.addVote}/>
+        <Chart votingColumns={votingColumns} votingOptions={votingOptions}/>
       </div>
     );
   }

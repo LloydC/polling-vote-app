@@ -4,17 +4,17 @@ export default class PollView extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-        selectedOption: ''
+        voteOption: ''
     }
     this.handleVote = this.handleVote.bind(this);
   }
 
   handleChange(e){
     const currentOption = e.target.parentNode.innerHTML.substr(23);
-    this.setState({selectedOption: currentOption})
+    this.setState({voteOption: currentOption})
   }
   handleVote(){
-    this.props.submitVote(this.state.selectedOption);
+    this.props.addVote(this.state.voteOption);
   }
 
   render(){
@@ -25,11 +25,11 @@ export default class PollView extends React.Component {
         {this.props.question ? <h2>Poll question:{this.props.question}</h2> : null} 
          <br/>
         <ul>
-         {this.props.options.map(option => (
+         {this.props.votingOptions ? this.props.votingOptions.map(option => (
           <li key={option} style={{ listStyleType: "none" }} defaultValue={option}>
             <input type="checkbox" onChange={e => this.handleChange(e)}></input>{option}
           </li>
-          ))}
+          )): null}
          </ul>
           <br/>
           <br/>

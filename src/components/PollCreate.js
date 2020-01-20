@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/create.css'
 
-class PollCreate extends React.Component {
+export default class PollCreate extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -93,5 +93,3 @@ class PollCreate extends React.Component {
           );
     }
 }
-
-export default PollCreate;

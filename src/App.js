@@ -9,9 +9,12 @@ class App extends React.Component {
     super(props)
     this.state = {
       question: "",
-      options: []
+      options: [],
+      vote: "",
+      votingColumns: []
     }
     this.submitPoll = this.submitPoll.bind(this);
+    this.submitVote = this.submitVote.bind(this);
     this.getOptions = this.getOptions.bind(this);
   }
 
@@ -19,16 +22,23 @@ class App extends React.Component {
     this.setState({question: poll});
   }
 
-  getOptions(options){
-    this.setState({options})
+  submitVote(vote){
+   this.setState({vote})
+  }
+
+  getOptions(options, votingColumns){
+    console.log(this.state.options)
+    console.log(options.length)
+    console.log(votingColumns)
+    this.setState({options, votingColumns})
   }
 
   render(){
     return (
       <div className="App">
         <PollCreate submitPoll={this.submitPoll} getOptions={this.getOptions}/>
-        <PollView question={this.state.question} options={this.state.options}/>
-        <Chart/>
+        <PollView question={this.state.question} options={this.state.options} submitVote={this.submitVote}/>
+        <Chart vote={this.state.vote}/>
       </div>
     );
   }

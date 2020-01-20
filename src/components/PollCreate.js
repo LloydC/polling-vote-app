@@ -7,7 +7,8 @@ class PollCreate extends React.Component {
         this.state = {
             question: '',
             currentOption: '', 
-            options: [], 
+            options: [],
+            votingColumns: [],
             maxOptionsReached: false}
         this.handleChange = this.handleChange.bind(this)
     }
@@ -24,9 +25,11 @@ class PollCreate extends React.Component {
         e.preventDefault();
         if(this.state.options.length <= 9){
             let newOptions = this.state.options;
+            let addVoteColumn = this.state.votingColumns;
             newOptions.push(this.state.currentOption)
-            this.props.getOptions(newOptions); //passing "newOptions" to App via props
-            this.setState({options: newOptions, currentOption: '', maxOptionsReached: false});
+            addVoteColumn.push(0)
+            this.props.getOptions(newOptions, addVoteColumn); //passing "newOptions" to App via props
+            this.setState({options: newOptions,votingColumns: addVoteColumn, currentOption: '', maxOptionsReached: false});
         }
         else{
             this.setState({maxOptionsReached: true});
@@ -34,16 +37,17 @@ class PollCreate extends React.Component {
     }
     removeOption(e){
         let arr = this.state.options
+        let removeColumn = this.state.votingColumns;
         const removeOptionName = e.target.previousSibling.value;
         for(let i = 0; i < arr.length; i++){
             if(arr[i] === removeOptionName){
                 arr.splice(i, 1);
+                removeColumn.splice(i, 1);
             }
         }
-        this.props.getOptions(arr); //passing "arr" to App via props
-        this.setState({options: arr, currentOption: ''});
-    }
-    
+        this.props.getOptions(arr, removeColumn); //passing "arr" to App via props
+        this.setState({options: arr, votingColumns: removeColumn, currentOption: ''});
+    } 
 
     render(){
         return (

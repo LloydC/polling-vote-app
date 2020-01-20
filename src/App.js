@@ -16,6 +16,7 @@ class App extends React.Component {
     this.addVote = this.addVote.bind(this);
     this.submitPoll = this.submitPoll.bind(this);
     this.getOptions = this.getOptions.bind(this);
+    this.resetApp = this.resetApp.bind(this);
   }
 
   addVote(voteName){
@@ -26,8 +27,24 @@ class App extends React.Component {
       this.setState({votingColumns, previousVote: voteName});
   }
 
-  calcPercentage(){
-
+  resetApp(){
+    if(this.state.question && this.state.question.length > 0 & this.state.previousVote){
+      this.setState({
+        question: '',
+        previousVote: '', 
+        votingOptions: [],
+        votingColumns: []
+        })
+    }
+    else {
+      this.setState({
+        question: '',
+        currentOption: '', 
+        options: [],
+        votingColumns: [],
+        maxOptionsReached: false})
+    }
+    
   }
 
   getOptions(votingOptions, votingColumns){
@@ -42,7 +59,7 @@ class App extends React.Component {
     
     return (
       <div className="App">
-        <PollCreate submitPoll={this.submitPoll} getOptions={this.getOptions}/>
+        <PollCreate submitPoll={this.submitPoll} getOptions={this.getOptions} resetApp={this.resetApp}/>
         <PollView question={question} votingOptions={votingOptions} addVote={this.addVote}/>
         <Chart votingColumns={votingColumns} votingOptions={votingOptions}/>
       </div>

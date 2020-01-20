@@ -9,10 +9,14 @@ export default class PollCreate extends React.Component {
             currentOption: '', 
             options: [],
             votingColumns: [],
-            maxOptionsReached: false}
-        this.handleChange = this.handleChange.bind(this)
+            maxOptionsReached: false
+        }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleReset = this.handleReset.bind(this);
     }
-
+    handleReset(){
+        this.props.resetApp();
+    }
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value });
       }
@@ -86,7 +90,7 @@ export default class PollCreate extends React.Component {
                 <br/>
                 {this.state.maxOptionsReached ? <span style={{color : "red"}}>Maximum number of options has been reached </span> : null}
                 <br/>
-                    <button>Reset</button>
+                    <button onClick={()=>this.handleReset()}>Reset</button>
                     </div>
                 </div>
             </div>

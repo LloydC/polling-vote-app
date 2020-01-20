@@ -65,6 +65,7 @@ export default class PollCreate extends React.Component {
                                 placeholder="Enter a question..."
                                 onChange={this.handleChange}
                                 value={this.state.question}
+                                maxLength="80"
                                 ></input>
                         <button>Submit</button>
                     </form>
@@ -75,6 +76,7 @@ export default class PollCreate extends React.Component {
                                 placeholder="Enter an option..."
                                 onChange={this.handleChange}
                                 value={this.state.currentOption}
+                                maxLength="80"
                                 ></input>
                         <button>Submit</button>
                     </form>

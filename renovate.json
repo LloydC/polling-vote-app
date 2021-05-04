@@ -1,4 +1,15 @@
 {
+  "packageRules": [
+    {
+      "timezone": "Africa/Abidjan",
+      "schedule": [
+        "earlyFridays"
+      ],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest", "devDependencies"],
+      "automerge": true,
+      "automergeType": "branch"
+    }
+  ],
   "extends": [
     "config:base"
   ]
